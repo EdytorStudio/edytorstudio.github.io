@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edytor Studio</title>
+<meta name="description" content="Edytor Studio">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="lang"><select id="lang" aria-label="Language"></select></div>
+<header class="hero">
+  <img class="logo" src="icon.png" alt="Edytor Studio" onerror="this.style.display='none'">
+  <h1>Edytor Studio</h1>
+  <p data-i18n="tagline"></p>
+</header>
+
+<main>
+  <section id="projects">
+    <div class="bar">
+      <h2 data-i18n="projects"></h2>
+      <span id="count" class="muted"></span>
+    </div>
+    <input id="q" type="search" data-i18n-ph="search" autocomplete="off">
+    <div id="list" class="grid"></div>
+    <p id="empty" class="muted" hidden data-i18n="empty"></p>
+  </section>
+</main>
+
+<footer class="muted">Edytor Studio</footer>
+
+<div id="view" class="view" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="README">
+    <button id="close" class="btn" type="button" data-i18n="close"></button>
+    <article id="doc" class="md"></article>
+  </div>
+</div>
+
+<script src="database.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
