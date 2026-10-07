@@ -1,6 +1,58 @@
 (function () {
+  var L = {
+    en: { tagline: 'A small studio building simple, fast and convenient apps and tools. Open source, clean interfaces, nothing extra.', projects: 'Projects', search: 'Search projects', site: 'Website', releases: 'Releases', close: 'Close', empty: 'Nothing found. Try another query.', loading: 'Loading...', fail: 'Could not load README.md. Open the repository: ', dberr: 'Could not load database.js. The file must be in the repository root and named exactly database.js.' },
+    uk: { tagline: 'Невелика студія, що робить прості, швидкі й зручні програми та інструменти. Відкритий код, чисті інтерфейси, нічого зайвого.', projects: 'Проекти', search: 'Пошук проектів', site: 'Сайт', releases: 'Релізи', close: 'Закрити', empty: 'Нічого не знайдено. Спробуйте інший запит.', loading: 'Завантаження...', fail: 'Не вдалося завантажити README.md. Відкрийте репозиторій: ', dberr: 'Не вдалося завантажити database.js. Файл має лежати в корені репозиторію і називатися саме database.js.' },
+    ru: { tagline: 'Небольшая студия, создающая простые, быстрые и удобные программы и инструменты. Открытый исходный код, чистые интерфейсы, ничего лишнего.', projects: 'Проекты', search: 'Поиск проектов', site: 'Сайт', releases: 'Релизы', close: 'Закрыть', empty: 'Ничего не найдено. Попробуйте другой запрос.', loading: 'Загрузка...', fail: 'Не удалось загрузить README.md. Откройте репозиторий: ', dberr: 'Не удалось загрузить database.js. Файл должен лежать в корне репозитория и называться именно database.js.' },
+    de: { tagline: 'Ein kleines Studio für einfache, schnelle und praktische Apps und Tools. Open Source, klare Oberflächen, nichts Überflüssiges.', projects: 'Projekte', search: 'Projekte suchen', site: 'Website', releases: 'Releases', close: 'Schließen', empty: 'Nichts gefunden. Versuche eine andere Suche.', loading: 'Wird geladen...', fail: 'README.md konnte nicht geladen werden. Repository öffnen: ', dberr: 'database.js konnte nicht geladen werden. Die Datei muss im Stammverzeichnis des Repositorys liegen und genau so heißen.' },
+    es: { tagline: 'Un pequeño estudio que crea aplicaciones y herramientas sencillas, rápidas y cómodas. Código abierto, interfaces limpias, nada de más.', projects: 'Proyectos', search: 'Buscar proyectos', site: 'Sitio web', releases: 'Versiones', close: 'Cerrar', empty: 'No se encontró nada. Prueba otra búsqueda.', loading: 'Cargando...', fail: 'No se pudo cargar README.md. Abre el repositorio: ', dberr: 'No se pudo cargar database.js. El archivo debe estar en la raíz del repositorio y llamarse exactamente database.js.' },
+    pl: { tagline: 'Małe studio tworzące proste, szybkie i wygodne aplikacje oraz narzędzia. Otwarty kod, czyste interfejsy, nic zbędnego.', projects: 'Projekty', search: 'Szukaj projektów', site: 'Strona', releases: 'Wydania', close: 'Zamknij', empty: 'Nic nie znaleziono. Spróbuj innego zapytania.', loading: 'Ładowanie...', fail: 'Nie udało się wczytać README.md. Otwórz repozytorium: ', dberr: 'Nie udało się wczytać database.js. Plik musi leżeć w katalogu głównym repozytorium i nazywać się dokładnie database.js.' }
+  };
+  var names = { en: 'English', uk: 'Українська', ru: 'Русский', de: 'Deutsch', es: 'Español', pl: 'Polski' };
+  var cur = 'en';
+
+  function detect() {
+    var s;
+    try { s = localStorage.getItem('lang'); } catch (e) {}
+    if (s && L[s]) return s;
+    var n = navigator.languages || [navigator.language || 'en'];
+    for (var i = 0; i < n.length; i++) {
+      var c = n[i].slice(0, 2).toLowerCase();
+      if (c === 'ua') c = 'uk';
+      if (L[c]) return c;
+    }
+    return 'en';
+  }
+
+  var I = window.I18N = {
+    names: names,
+    get lang() { return cur; },
+    t: function (k) { return (L[cur] && L[cur][k]) || L.en[k] || k; },
+    /* рядок або об'єкт {en, uk, ru, ...} -> текст поточною мовою */
+    loc: function (v) {
+      if (v && typeof v === 'object') return v[cur] || v.en || v.uk || v[Object.keys(v)[0]] || '';
+      return v || '';
+    },
+    all: function (v) { return v && typeof v === 'object' ? Object.keys(v).map(function (k) { return v[k]; }).join(' ') : (v || ''); },
+    apply: function () {
+      document.documentElement.lang = cur;
+      [].forEach.call(document.querySelectorAll('[data-i18n]'), function (e) { e.textContent = I.t(e.getAttribute('data-i18n')); });
+      [].forEach.call(document.querySelectorAll('[data-i18n-ph]'), function (e) { e.placeholder = I.t(e.getAttribute('data-i18n-ph')); });
+    },
+    set: function (l) {
+      if (!L[l]) return;
+      cur = l;
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      I.apply();
+      if (I.onchange) I.onchange();
+    },
+    init: function () { cur = detect(); I.apply(); }
+  };
+})();
+
+function start() {
   var I = window.I18N;
-  var data = window.PROJECTS || [];
+  var dbError = !Array.isArray(window.PROJECTS);
+  var data = dbError ? [] : window.PROJECTS;
   var $ = function (s) { return document.querySelector(s); };
   var list = $('#list'), q = $('#q'), count = $('#count'), empty = $('#empty');
   var view = $('#view'), doc = $('#doc');
@@ -65,6 +117,7 @@
       if (!s || text[i].indexOf(s) !== -1) { list.appendChild(card(p)); n++; }
     });
     count.textContent = n + ' / ' + data.length;
+    empty.textContent = I.t(dbError ? 'dberr' : 'empty');
     empty.hidden = n > 0;
   }
 
@@ -139,4 +192,12 @@
   sel.value = I.lang;
   sel.onchange = function () { I.set(sel.value); };
   render();
+}
+
+/* Завантаження database.js з кореня сайту (з обходом кешу), потім запуск */
+(function () {
+  var s = document.createElement('script');
+  s.src = 'database.js?v=' + Date.now();
+  s.onload = s.onerror = start;
+  document.head.appendChild(s);
 })();
