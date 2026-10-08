@@ -78,12 +78,16 @@ function start() {
   function card(p) {
     var c = el('article', 'card');
     var t = el('div', 'thumb');
+    var ph = function () {
+      t.textContent = '';
+      t.appendChild(el('span', 'ph', (I.loc(p.name) || '?').charAt(0).toUpperCase()));
+    };
     if (p.icon) {
       var img = el('img');
       img.src = p.icon; img.alt = ''; img.loading = 'lazy';
-      img.onerror = function () { t.style.display = 'none'; };
+      img.onerror = ph;
       t.appendChild(img);
-    } else t.style.display = 'none';
+    } else ph();
     c.appendChild(t);
 
     var b = el('div', 'body');
