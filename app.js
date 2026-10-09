@@ -132,41 +132,90 @@ function start() {
     if (e.key === 'Escape') closeView();
   });
 
-  /* README (Markdown) */
-  function md(s, base) {
+  /* README (Markdown + базовий HTML з README) */
+  function md(s, base, repoUrl) {
     var esc = function (t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    var q = function (t) { return t.replace(/"/g, '&quot;'); };
     var blocks = [];
-    s = s.replace(/```[^\n]*\n([\s\S]*?)```/g, function (_, c) {
-      blocks.push('<pre><code>' + esc(c) + '</code></pre>');
-      return '\u0000' + (blocks.length - 1) + '\u0000';
-    });
-    s = esc(s.replace(/<!--[\s\S]*?-->/g, '').replace(/<\/?[a-z][^>]*>/gi, ''));
-    var url = function (u) {
-      u = /^(https?:|mailto:|#)/.test(u) ? u : base + u.replace(/^\.?\//, '');
+    var keep = function (h) { blocks.push(h); return '\u0000' + (blocks.length - 1) + '\u0000'; };
+    var abs = function (u) { return /^(https?:|mailto:)/i.test(u); };
+    var imgUrl = function (u) { return (abs(u) ? u : base + u.replace(/^\.?\//, '')).replace(/"/g, '%22'); };
+    var linkUrl = function (u) {
+      if (!abs(u)) u = u.charAt(0) === '#' ? repoUrl + u : repoUrl + '/blob/HEAD/' + u.replace(/^\.?\//, '');
       return u.replace(/"/g, '%22');
     };
+
+    /* 1. блоки коду */
+    s = s.replace(/```[^\n]*\n([\s\S]*?)```/g, function (_, c) { return '\n' + keep('<pre><code>' + esc(c) + '</code></pre>') + '\n'; });
+
+    /* 2. HTML з README: img, a, br, h1-h6 підтримуємо, решту тегів прибираємо */
+    s = s.replace(/<!--[\s\S]*?-->/g, '')
+      .replace(/<img\b[^>]*>/gi, function (t) {
+        var src = (t.match(/\bsrc=["']([^"']+)["']/i) || [])[1];
+        if (!src) return '';
+        var alt = (t.match(/\balt=["']([^"']*)["']/i) || [])[1] || '';
+        var h = (t.match(/\bheight=["']?(\d{1,3})/i) || [])[1];
+        var w = (t.match(/\bwidth=["']?(\d{1,3})/i) || [])[1];
+        var st = (h ? 'height:' + h + 'px;' : '') + (w ? 'width:' + w + 'px;' : '');
+        return keep('<img src="' + esc(imgUrl(src)) + '" alt="' + q(esc(alt)) + '"' + (st ? ' style="' + st + '"' : '') + '>');
+      })
+      .replace(/<a\b[^>]*?\bhref=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, function (_, h, c) { return '[' + c.replace(/\s+/g, ' ').trim() + '](' + h + ')'; })
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi, function (_, n, c) { return '\n' + '######'.slice(0, +n) + ' ' + c.replace(/<[^>]*>/g, '').trim() + '\n'; })
+      .replace(/<\/?[a-z][^>]*>/gi, '');
+
+    s = esc(s);
+
+    /* 3. рядкові елементи */
     var inl = function (t) {
       return t.replace(/`([^`]+)`/g, '<code>$1</code>')
-        .replace(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g, function (_, a, u) { return '<img alt="' + a + '" src="' + url(u) + '">'; })
-        .replace(/\[([^\]]+)\]\(([^)\s]+)[^)]*\)/g, function (_, a, u) { return '<a href="' + url(u) + '" target="_blank" rel="noopener">' + a + '</a>'; })
+        .replace(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g, function (_, a, u) { return keep('<img alt="' + q(a) + '" src="' + imgUrl(u) + '">'); })
+        .replace(/\[([^\]]+)\]\(([^)\s]+)[^)]*\)/g, function (_, a, u) { return '<a href="' + linkUrl(u) + '" target="_blank" rel="noopener">' + a + '</a>'; })
         .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
         .replace(/\*([^*]+)\*/g, '<i>$1</i>');
     };
-    var out = [], ul = false, para = [];
+
+    /* 4. блоки: заголовки, списки, таблиці, цитати */
+    var cells = function (l) { return l.trim().replace(/^\||\|$/g, '').split('|').map(function (c) { return c.trim(); }); };
+    var sep = /^\s*\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/;
+    var lines = s.split('\n'), out = [], list = null, para = [];
     var flush = function () { if (para.length) { out.push('<p>' + inl(para.join(' ')) + '</p>'); para = []; } };
-    var close = function () { if (ul) { out.push('</ul>'); ul = false; } };
-    s.split('\n').forEach(function (l) {
-      var m;
-      if ((m = l.match(/^\u0000(\d+)\u0000$/))) { flush(); close(); out.push(blocks[m[1]]); }
+    var close = function () { if (list) { out.push('</' + list + '>'); list = null; } };
+    var cell = function (tag) { return function (c) { return '<' + tag + '>' + inl(c) + '</' + tag + '>'; }; };
+
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i], m;
+      if ((m = l.match(/^\u0000(\d+)\u0000$/)) && /^<pre>/.test(blocks[m[1]])) { flush(); close(); out.push(blocks[m[1]]); }
+      else if (l.indexOf('|') !== -1 && i + 1 < lines.length && lines[i + 1].indexOf('|') !== -1 && sep.test(lines[i + 1])) {
+        flush(); close();
+        var t = '<div class="tw"><table><thead><tr>' + cells(l).map(cell('th')).join('') + '</tr></thead><tbody>';
+        i += 2;
+        while (i < lines.length && lines[i].trim() && lines[i].indexOf('|') !== -1) { t += '<tr>' + cells(lines[i]).map(cell('td')).join('') + '</tr>'; i++; }
+        i--;
+        out.push(t + '</tbody></table></div>');
+      }
       else if ((m = l.match(/^(#{1,6})\s+(.*)/))) { flush(); close(); out.push('<h' + m[1].length + '>' + inl(m[2]) + '</h' + m[1].length + '>'); }
-      else if ((m = l.match(/^\s*[-*+]\s+(.*)/))) { flush(); if (!ul) { out.push('<ul>'); ul = true; } out.push('<li>' + inl(m[1]) + '</li>'); }
-      else if ((m = l.match(/^&gt;\s?(.*)/))) { flush(); close(); out.push('<blockquote>' + inl(m[1]) + '</blockquote>'); }
-      else if (/^\s*(---|\*\*\*)\s*$/.test(l)) { flush(); close(); out.push('<hr>'); }
+      else if (/^&gt;/.test(l)) {
+        flush(); close();
+        var bq = [];
+        while (i < lines.length && /^&gt;/.test(lines[i])) { bq.push(lines[i].replace(/^&gt;\s?/, '')); i++; }
+        i--;
+        var head = '', a = (bq[0] || '').match(/^\[!(\w+)\]\s*(.*)$/);
+        if (a) { head = '<b>' + a[1].charAt(0) + a[1].slice(1).toLowerCase() + '</b><br>'; bq[0] = a[2]; }
+        out.push('<blockquote>' + head + inl(bq.join(' ').trim()) + '</blockquote>');
+      }
+      else if ((m = l.match(/^\s*([-*+]|\d+[.)])\s+(.*)/))) {
+        flush();
+        var tag = /\d/.test(m[1]) ? 'ol' : 'ul';
+        if (list !== tag) { close(); out.push('<' + tag + '>'); list = tag; }
+        out.push('<li>' + inl(m[2]) + '</li>');
+      }
+      else if (/^\s*(---+|\*\*\*+|___+)\s*$/.test(l)) { flush(); close(); out.push('<hr>'); }
       else if (!l.trim()) { flush(); close(); }
       else { close(); para.push(l.trim()); }
-    });
+    }
     flush(); close();
-    return out.join('');
+    return out.join('').replace(/\u0000(\d+)\u0000/g, function (_, n) { return blocks[n]; });
   }
 
   function openReadme(p, repo) {
@@ -176,7 +225,7 @@ function start() {
     document.body.classList.add('lock');
     fetch(base + 'README.md')
       .then(function (r) { if (!r.ok) throw 0; return r.text(); })
-      .then(function (t) { doc.innerHTML = md(t, base); })
+      .then(function (t) { doc.innerHTML = md(t, base, 'https://github.com/' + repo.o + '/' + repo.r); })
       .catch(function () {
         doc.textContent = I.t('fail');
         doc.appendChild(link('GitHub', p.github));
