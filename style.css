@@ -43,3 +43,8 @@ body.lock{overflow:hidden}
 .hero p+p{margin-top:10px;color:var(--text)}
 .thumb img{min-width:0;min-height:0}
 .ph{font-size:3rem;font-weight:700;color:var(--muted);opacity:.45}
+.tw{overflow-x:auto;margin:12px 0}
+.md table{border-collapse:collapse;width:100%}
+.md th,.md td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.md img{vertical-align:middle}
+.md h1,.md h2{border-bottom:1px solid var(--line);padding-bottom:6px}
