@@ -83,5 +83,20 @@ window.PROJECTS = [
     },
     site: "",
     tags: ["android-tv", "led", "vfd", "meson-vfd", "amlogic", "x96-max-plus-ultra", "root"]
+  },
+  {
+    name: "DhizukuF",
+    github: "https://github.com/AmakerGame/DhizukuF",
+    icon: "https://raw.githubusercontent.com/AmakerGame/DhizukuF/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp",
+    description: {
+      en: "Fork of Dhizuku with DISH integration and additional features.",
+      uk: "Форк Dhizuku з інтеграцією DISH та додатковими функціями.",
+      ru: "Форк Dhizuku с интеграцией DISH и дополнительными функциями.",
+      de: "Fork von Dhizuku mit DISH-Integration und zusätzlichen Funktionen.",
+      es: "Fork de Dhizuku con integración de DISH y funciones adicionales.",
+      pl: "Fork Dhizuku z integracją DISH i dodatkowymi funkcjami."
+    },
+    site: "",
+    tags: ["android", "dhizuku", "dish"]
   }
 ];
