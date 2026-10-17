@@ -87,7 +87,7 @@ window.PROJECTS = [
   {
     name: "DhizukuF",
     github: "https://github.com/AmakerGame/DhizukuF",
-    icon: "https://raw.githubusercontent.com/AmakerGame/DhizukuF/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp",
+    icon: "https://raw.githubusercontent.com/AmakerGame/DhizukuF/main/app/src/main/res/drawable-xhdpi/banner.png",
     description: {
       en: "Fork of Dhizuku with DISH integration and additional features.",
       uk: "Форк Dhizuku з інтеграцією DISH та додатковими функціями.",
