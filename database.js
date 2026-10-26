@@ -57,7 +57,7 @@ window.PROJECTS = [
   {
     name: "AndroidFS-F",
     github: "https://github.com/AmakerGame/AndroidFS-F",
-    icon: "",
+    icon: "https://github.com/AmakerGame/AndroidFS-F/blob/master/assets/icon.png",
     description: {
       en: "Fork of AndroidFS for Windows: mounts an Android device over ADB as a drive in Explorer (Q: by default), so you can work with its files like local ones, without MTP. Alpha.",
       uk: "Форк AndroidFS для Windows: підключає Android-пристрій через ADB як диск у Провіднику (за замовчуванням Q:), тож з файлами можна працювати як з локальними, без MTP. Альфа-версія.",
@@ -87,7 +87,7 @@ window.PROJECTS = [
   {
     name: "DhizukuF",
     github: "https://github.com/AmakerGame/DhizukuF",
-    icon: "https://raw.githubusercontent.com/AmakerGame/DhizukuF/main/app/src/main/res/drawable-xhdpi/banner.png",
+    icon: "https://github.com/AmakerGame/DhizukuF/blob/main/app/src/main/res/drawable-xxhdpi/banner_dhizukuf_orig.png",
     description: {
       en: "Fork of Dhizuku with DISH integration and additional features.",
       uk: "Форк Dhizuku з інтеграцією DISH та додатковими функціями.",
