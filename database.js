@@ -1,12 +1,11 @@
 /*
-  СПИСОК ПРОЄКТІВ
-
-  name        - назва (рядок або об'єкт з мовами)
-  github      - посилання на репозиторій (звідси беруться Релізи і README)
-  icon        - посилання на зображення; порожньо "" - замість іконки буде перша літера назви (щоб картки були однакові)
-  description - об'єкт { en, uk, ru, de, es, pl }; якщо мови немає, береться en, потім uk
-  site        - сайт проєкту; порожньо "" - кнопка відкриє README.md
-  tags        - слова для пошуку
+  Project list.
+  name: project name (string or localized object)
+  github: repository URL
+  icon: image URL, or empty string to show the first letter
+  description: localized project descriptions
+  site: project page; when set, the card's main button opens it
+  tags: searchable keywords
 */
 window.PROJECTS = [
   {
@@ -14,12 +13,12 @@ window.PROJECTS = [
     github: "https://github.com/LeanKeyboardF/LeanKeyboardF",
     icon: "https://raw.githubusercontent.com/LeanKeyboardF/LeanKeyboardF/master/img/leankeykeyboard_logo_small.png",
     description: {
-      en: "Fork of LeanKeyboard: an on-screen keyboard for Android TV that works with any remote, needs no root or Google services, and adds a floating keyboard, themes, clipboard history and word suggestions.",
-      uk: "Форк LeanKeyboard: екранна клавіатура для Android TV, що працює з будь-яким пультом без root і сервісів Google. Додано плаваючу клавіатуру, теми, історію буфера обміну та підказки слів.",
-      ru: "Форк LeanKeyboard: экранная клавиатура для Android TV, работающая с любым пультом без root и сервисов Google. Добавлены плавающая клавиатура, темы, история буфера обмена и подсказки слов.",
-      de: "Fork von LeanKeyboard: Bildschirmtastatur für Android TV, die mit jeder Fernbedienung funktioniert, ohne Root und Google-Dienste. Neu: schwebende Tastatur, Themes, Zwischenablage-Verlauf und Wortvorschläge.",
-      es: "Fork de LeanKeyboard: teclado en pantalla para Android TV que funciona con cualquier mando, sin root ni servicios de Google. Añade teclado flotante, temas, historial del portapapeles y sugerencias de palabras.",
-      pl: "Fork LeanKeyboard: klawiatura ekranowa dla Android TV działająca z każdym pilotem, bez roota i usług Google. Dodano pływającą klawiaturę, motywy, historię schowka i podpowiedzi słów."
+      en: "Fork of LeanKeyboard: an Android TV keyboard that works with any remote without root or Google services. Adds a floating keyboard, themes, clipboard history and word suggestions.",
+      uk: "Форк LeanKeyboard: клавіатура для Android TV, що працює з будь-яким пультом без root і сервісів Google. Має плаваючу клавіатуру, теми, історію буфера обміну та підказки слів.",
+      ru: "Форк LeanKeyboard: клавиатура для Android TV, работающая с любым пультом без root и сервисов Google. Есть плавающая клавиатура, темы, история буфера обмена и подсказки слов.",
+      de: "Fork von LeanKeyboard: Android-TV-Tastatur für jede Fernbedienung, ohne Root oder Google-Dienste. Mit schwebender Tastatur, Designs, Zwischenablage-Verlauf und Wortvorschlägen.",
+      es: "Fork de LeanKeyboard: teclado para Android TV compatible con cualquier mando, sin root ni servicios de Google. Incluye teclado flotante, temas, historial del portapapeles y sugerencias.",
+      pl: "Fork LeanKeyboard: klawiatura Android TV działająca z każdym pilotem, bez roota i usług Google. Oferuje pływającą klawiaturę, motywy, historię schowka i podpowiedzi."
     },
     site: "https://leankeyboardf.github.io/",
     tags: ["android-tv", "keyboard", "leankeyboard", "ime", "клавіатура", "клавиатура"]
@@ -29,12 +28,12 @@ window.PROJECTS = [
     github: "https://github.com/AmakerGame/altair8800-libretro",
     icon: "https://commons.wikimedia.org/wiki/Special:FilePath/Altair_8800,_Smithsonian_Museum.jpg?width=600",
     description: {
-      en: "Libretro core for RetroArch that emulates the Altair 8800 (Intel 8080 at 2 MHz) with a simulated front panel of switches and LEDs. Runs on Windows, Linux and macOS.",
-      uk: "Ядро Libretro для RetroArch, що емулює Altair 8800 (Intel 8080, 2 МГц) із симульованою передньою панеллю з перемикачами та світлодіодами. Працює на Windows, Linux і macOS.",
-      ru: "Ядро Libretro для RetroArch, эмулирующее Altair 8800 (Intel 8080, 2 МГц) с имитацией передней панели с переключателями и светодиодами. Работает на Windows, Linux и macOS.",
-      de: "Libretro-Core für RetroArch, der den Altair 8800 (Intel 8080, 2 MHz) mit simuliertem Frontpanel aus Schaltern und LEDs emuliert. Läuft unter Windows, Linux und macOS.",
-      es: "Núcleo de Libretro para RetroArch que emula el Altair 8800 (Intel 8080 a 2 MHz) con un panel frontal simulado de interruptores y LED. Funciona en Windows, Linux y macOS.",
-      pl: "Rdzeń Libretro dla RetroArch emulujący Altair 8800 (Intel 8080, 2 MHz) z symulowanym panelem przednim z przełącznikami i diodami LED. Działa w systemach Windows, Linux i macOS."
+      en: "Libretro core for RetroArch emulating the Altair 8800 (Intel 8080, 2 MHz) with a simulated front panel. Runs on Windows, Linux and macOS.",
+      uk: "Ядро Libretro для RetroArch, що емулює Altair 8800 (Intel 8080, 2 МГц) із симуляцією передньої панелі. Працює у Windows, Linux і macOS.",
+      ru: "Ядро Libretro для RetroArch, эмулирующее Altair 8800 (Intel 8080, 2 МГц) с симуляцией передней панели. Работает в Windows, Linux и macOS.",
+      de: "Libretro-Core für RetroArch zur Emulation des Altair 8800 (Intel 8080, 2 MHz) mit simuliertem Frontpanel. Läuft unter Windows, Linux und macOS.",
+      es: "Núcleo Libretro para RetroArch que emula el Altair 8800 (Intel 8080, 2 MHz) con un panel frontal simulado. Funciona en Windows, Linux y macOS.",
+      pl: "Rdzeń Libretro dla RetroArch emulujący Altair 8800 (Intel 8080, 2 MHz) z symulowanym panelem przednim. Działa w Windows, Linux i macOS."
     },
     site: "",
     tags: ["libretro", "retroarch", "emulator", "altair8800", "intel8080", "c", "емулятор", "эмулятор"]
@@ -44,12 +43,12 @@ window.PROJECTS = [
     github: "https://github.com/AmakerGame/mrowserF",
     icon: "https://raw.githubusercontent.com/AmakerGame/mrowserF/main/fastlane/metadata/android/en-US/images/icon.png",
     description: {
-      en: "Fork of mrowser, a sideloaded Android TV browser: it finds the HLS stream on a page and plays it in a native player with synced audio and subtitles, driven by a D-pad cursor.",
-      uk: "Форк mrowser, браузера для Android TV: знаходить на сторінці HLS-потік і відтворює його в нативному плеєрі з синхронним звуком і субтитрами. Керування курсором з пульта.",
-      ru: "Форк mrowser, браузера для Android TV: находит на странице HLS-поток и воспроизводит его в нативном плеере с синхронными звуком и субтитрами. Управление курсором с пульта.",
-      de: "Fork von mrowser, einem Android-TV-Browser: Er erkennt den HLS-Stream einer Seite und spielt ihn in einem nativen Player mit synchronem Ton und Untertiteln ab. Bedienung per Fernbedienungs-Cursor.",
-      es: "Fork de mrowser, un navegador para Android TV: detecta el flujo HLS de una página y lo reproduce en un reproductor nativo con audio y subtítulos sincronizados. Se maneja con un cursor desde el mando.",
-      pl: "Fork mrowser, przeglądarki dla Android TV: wykrywa strumień HLS na stronie i odtwarza go w natywnym odtwarzaczu z zsynchronizowanym dźwiękiem i napisami. Sterowanie kursorem z pilota."
+      en: "Fork of mrowser, an Android TV browser that finds HLS streams on webpages and plays them in a native player with synced audio and subtitles. Controlled with a D-pad cursor.",
+      uk: "Форк mrowser — браузера для Android TV, що знаходить HLS-потоки на вебсторінках і відтворює їх у нативному плеєрі із синхронізованими звуком і субтитрами. Керування курсором із пульта.",
+      ru: "Форк mrowser — браузера для Android TV, который находит HLS-потоки на веб-страницах и воспроизводит их в нативном плеере с синхронными звуком и субтитрами. Управление курсором с пульта.",
+      de: "Fork von mrowser, einem Android-TV-Browser, der HLS-Streams auf Webseiten findet und mit synchronem Ton und Untertiteln nativ abspielt. Bedienung per D-Pad-Cursor.",
+      es: "Fork de mrowser, un navegador para Android TV que detecta transmisiones HLS en páginas y las reproduce en un reproductor nativo con audio y subtítulos sincronizados. Control con cursor direccional.",
+      pl: "Fork mrowsera, przeglądarki Android TV, która wyszukuje strumienie HLS na stronach i odtwarza je w natywnym odtwarzaczu z synchronizowanym dźwiękiem i napisami. Sterowanie kursorem z pilota."
     },
     site: "",
     tags: ["android-tv", "browser", "hls", "exoplayer", "media3", "subtitles", "браузер"]
@@ -59,12 +58,12 @@ window.PROJECTS = [
     github: "https://github.com/AmakerGame/AndroidFS-F",
     icon: "https://github.com/AmakerGame/AndroidFS-F/blob/master/assets/icon.png",
     description: {
-      en: "Fork of AndroidFS for Windows: mounts an Android device over ADB as a drive in Explorer (Q: by default), so you can work with its files like local ones, without MTP. Alpha.",
-      uk: "Форк AndroidFS для Windows: підключає Android-пристрій через ADB як диск у Провіднику (за замовчуванням Q:), тож з файлами можна працювати як з локальними, без MTP. Альфа-версія.",
-      ru: "Форк AndroidFS для Windows: подключает Android-устройство через ADB как диск в Проводнике (по умолчанию Q:), так что с файлами можно работать как с локальными, без MTP. Альфа-версия.",
-      de: "Fork von AndroidFS für Windows: bindet ein Android-Gerät über ADB als Laufwerk im Explorer ein (standardmäßig Q:), sodass sich Dateien wie lokale bearbeiten lassen, ohne MTP. Alpha-Version.",
-      es: "Fork de AndroidFS para Windows: monta un dispositivo Android mediante ADB como unidad en el Explorador (Q: por defecto), para trabajar con sus archivos como si fueran locales, sin MTP. Versión alfa.",
-      pl: "Fork AndroidFS dla Windows: montuje urządzenie z Androidem przez ADB jako dysk w Eksploratorze (domyślnie Q:), dzięki czemu pliki obsługuje się jak lokalne, bez MTP. Wersja alfa."
+      en: "Fork of AndroidFS for Windows: mounts an Android device over ADB as a drive in Explorer, letting you work with files without MTP. Alpha.",
+      uk: "Форк AndroidFS для Windows: підключає Android-пристрій через ADB як диск у Провіднику, щоб працювати з файлами без MTP. Альфа-версія.",
+      ru: "Форк AndroidFS для Windows: подключает Android-устройство через ADB как диск в Проводнике, позволяя работать с файлами без MTP. Альфа-версия.",
+      de: "Fork von AndroidFS für Windows: bindet ein Android-Gerät über ADB als Laufwerk im Explorer ein und ermöglicht Dateizugriff ohne MTP. Alpha.",
+      es: "Fork de AndroidFS para Windows: monta un dispositivo Android mediante ADB como unidad en el Explorador para gestionar archivos sin MTP. Versión alfa.",
+      pl: "Fork AndroidFS dla Windows: montuje urządzenie z Androidem przez ADB jako dysk w Eksploratorze i umożliwia obsługę plików bez MTP. Wersja alfa."
     },
     site: "",
     tags: ["windows", "adb", "dokan", "android", "mtp", "drive", "explorer", "rust"]
@@ -74,12 +73,12 @@ window.PROJECTS = [
     github: "https://github.com/AmakerGame/LedRemote-X96-Max-Plus-Ultra",
     icon: "",
     description: {
-      en: "Android TV app (Android 11+) for controlling the LED indicators and VFD display of boxes with the meson-vfd (Amlogic) driver, such as the X96 Max Plus Ultra. Needs root.",
-      uk: "Застосунок для Android TV (Android 11+) для керування LED-індикаторами та VFD-дисплеєм приставок з драйвером meson-vfd (Amlogic), як-от X96 Max Plus Ultra. Потрібен root.",
-      ru: "Приложение для Android TV (Android 11+) для управления LED-индикаторами и VFD-дисплеем приставок с драйвером meson-vfd (Amlogic), например X96 Max Plus Ultra. Нужен root.",
-      de: "Android-TV-App (ab Android 11) zur Steuerung der LED-Anzeigen und des VFD-Displays von Boxen mit meson-vfd-Treiber (Amlogic), z. B. X96 Max Plus Ultra. Benötigt Root.",
-      es: "Aplicación para Android TV (Android 11+) que controla los indicadores LED y la pantalla VFD de cajas con el controlador meson-vfd (Amlogic), como la X96 Max Plus Ultra. Requiere root.",
-      pl: "Aplikacja na Android TV (Android 11+) do sterowania diodami LED i wyświetlaczem VFD w przystawkach ze sterownikiem meson-vfd (Amlogic), np. X96 Max Plus Ultra. Wymaga roota."
+      en: "Android TV app (Android 11+) for controlling LED indicators and the VFD display on boxes with the Amlogic meson-vfd driver, such as X96 Max Plus Ultra. Requires root.",
+      uk: "Застосунок для Android TV (Android 11+) для керування LED-індикаторами та VFD-дисплеєм приставок із драйвером Amlogic meson-vfd, наприклад X96 Max Plus Ultra. Потрібен root.",
+      ru: "Приложение для Android TV (Android 11+) для управления LED-индикаторами и VFD-дисплеем приставок с драйвером Amlogic meson-vfd, например X96 Max Plus Ultra. Нужен root.",
+      de: "Android-TV-App (ab Android 11) zur Steuerung von LED-Anzeigen und VFD-Display bei Boxen mit Amlogic-meson-vfd-Treiber, etwa X96 Max Plus Ultra. Root erforderlich.",
+      es: "Aplicación para Android TV (Android 11+) que controla los indicadores LED y la pantalla VFD de dispositivos con el controlador Amlogic meson-vfd, como X96 Max Plus Ultra. Requiere root.",
+      pl: "Aplikacja Android TV (Android 11+) do sterowania diodami LED i wyświetlaczem VFD w urządzeniach ze sterownikiem Amlogic meson-vfd, np. X96 Max Plus Ultra. Wymaga roota."
     },
     site: "",
     tags: ["android-tv", "led", "vfd", "meson-vfd", "amlogic", "x96-max-plus-ultra", "root"]
@@ -98,5 +97,20 @@ window.PROJECTS = [
     },
     site: "",
     tags: ["android", "dhizuku", "dish"]
+  },
+  {
+    name: "EdUI",
+    github: "",
+    icon: "",
+    description: {
+      en: "Custom shell and launcher for TV boxes, with a focus on maximum stability and ease of use. Planned editions: Ukraine region and General for worldwide use.",
+      uk: "Кастомна оболонка та пусковик для TV-боксів із фокусом на максимальну стабільність і зручність. Заплановано версії: Український регіон та General для загального використання.",
+      ru: "Кастомная оболочка и лаунчер для TV-боксов с упором на максимальную стабильность и удобство. Планируются версии: Украинский регион и General для общего использования.",
+      de: "Benutzerdefinierte Oberfläche und Launcher für TV-Boxen mit Fokus auf maximale Stabilität und einfache Bedienung. Geplant sind die Editionen Ukraine-Region und General für die weltweite Nutzung.",
+      es: "Interfaz y lanzador personalizados para TV boxes, centrados en la máxima estabilidad y facilidad de uso. Habrá ediciones para la región de Ucrania y General para uso global.",
+      pl: "Niestandardowa powłoka i launcher dla TV-boxów, nastawione na maksymalną stabilność i wygodę. Planowane wersje: region Ukrainy oraz General do użytku globalnego."
+    },
+    site: "https://edytorstudio.github.io/edui.html",
+    tags: ["edui", "android-tv", "tv-box", "launcher", "shell", "ua", "ukraine", "global", "оболонка", "пусковик"]
   }
 ];
