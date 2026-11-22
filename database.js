@@ -103,12 +103,12 @@ window.PROJECTS = [
     github: "",
     icon: "",
     description: {
-      en: "Custom shell and launcher for TV boxes, with a focus on maximum stability and ease of use. Planned editions: Ukraine region and General for worldwide use.",
-      uk: "Кастомна оболонка та пусковик для TV-боксів із фокусом на максимальну стабільність і зручність. Заплановано версії: Український регіон та General для загального використання.",
-      ru: "Кастомная оболочка и лаунчер для TV-боксов с упором на максимальную стабильность и удобство. Планируются версии: Украинский регион и General для общего использования.",
-      de: "Benutzerdefinierte Oberfläche und Launcher für TV-Boxen mit Fokus auf maximale Stabilität und einfache Bedienung. Geplant sind die Editionen Ukraine-Region und General für die weltweite Nutzung.",
-      es: "Interfaz y lanzador personalizados para TV boxes, centrados en la máxima estabilidad y facilidad de uso. Habrá ediciones para la región de Ucrania y General para uso global.",
-      pl: "Niestandardowa powłoka i launcher dla TV-boxów, nastawione na maksymalną stabilność i wygodę. Planowane wersje: region Ukrainy oraz General do użytku globalnego."
+      en: "Custom shell and launcher for TV boxes, focused on maximum stability and ease of use. Ukraine Region: a version for Ukrainian users and localization. General: a universal version for worldwide use. Both editions prioritize convenient navigation and reliable everyday use.",
+      uk: "Кастомна оболонка та пусковик для TV-боксів із фокусом на максимальну стабільність і зручність. Український регіон — версія для користувачів України з українською локалізацією. General — універсальна версія для загального використання у світі. Обидві версії орієнтовані на зручну навігацію та надійну щоденну роботу.",
+      ru: "Кастомная оболочка и лаунчер для TV-боксов с упором на максимальную стабильность и удобство. Украинский регион — версия для пользователей Украины с украинской локализацией. General — универсальная версия для использования во всём мире. Обе версии ориентированы на удобную навигацию и надёжную повседневную работу.",
+      de: "Benutzerdefinierte Oberfläche und Launcher für TV-Boxen mit Fokus auf Stabilität und einfache Bedienung. Ukraine Region: eine Version für Nutzer in der Ukraine mit ukrainischer Lokalisierung. General: eine universelle Version für den weltweiten Einsatz. Beide Editionen setzen auf bequeme Navigation und zuverlässigen Alltagseinsatz.",
+      es: "Interfaz y lanzador personalizados para TV boxes, centrados en la estabilidad y la facilidad de uso. Ukraine Region: versión para usuarios de Ucrania con localización ucraniana. General: versión universal para uso global. Ambas priorizan una navegación cómoda y un funcionamiento fiable en el día a día.",
+      pl: "Niestandardowa powłoka i launcher dla TV-boxów, nastawione na stabilność i wygodę. Ukraine Region: wersja dla użytkowników w Ukrainie z ukraińską lokalizacją. General: uniwersalna wersja do użytku na całym świecie. Obie wersje stawiają na wygodną nawigację i niezawodne działanie na co dzień."
     },
     site: "https://edytorstudio.github.io/edui.html",
     tags: ["edui", "android-tv", "tv-box", "launcher", "shell", "ua", "ukraine", "global", "оболонка", "пусковик"]
