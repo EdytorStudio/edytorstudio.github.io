@@ -4,6 +4,11 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .muted{color:var(--muted)}
+.topnav{height:58px;display:flex;align-items:center;gap:24px;max-width:1040px;margin:0 auto;padding:0 20px;border-bottom:1px solid var(--line)}
+.topnav-brand,.topnav-link{color:var(--text);text-decoration:none;font-weight:700}
+.topnav-brand{margin-right:auto}
+.topnav-link{padding:7px 12px;border:1px solid var(--line);border-radius:8px}
+.topnav-link:hover{border-color:var(--acc);color:var(--acc)}
 .hero{max-width:720px;margin:0 auto;padding:72px 20px 40px;text-align:center}
 .logo{width:96px;height:96px;object-fit:contain;display:block;margin:0 auto 20px}
 h1{margin:0 0 12px;font-size:clamp(2rem,6vw,3rem);letter-spacing:-.02em;line-height:1.1}
@@ -37,7 +42,7 @@ footer{padding-top:48px;padding-bottom:32px;text-align:center;font-size:.9rem}
 .md blockquote{margin:12px 0;padding-left:12px;border-left:3px solid var(--line);color:var(--muted)}
 .md hr{border:0;border-top:1px solid var(--line)}
 body.lock{overflow:hidden}
-.lang{position:absolute;top:12px;right:12px}
+.lang{position:absolute;top:70px;right:12px}
 .lang select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);font:inherit;font-size:.9rem}
 .lang select:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
 .hero p+p{margin-top:10px;color:var(--text)}
@@ -48,3 +53,14 @@ body.lock{overflow:hidden}
 .md th,.md td{border:1px solid var(--line);padding:6px 10px;text-align:left}
 .md img{vertical-align:middle}
 .md h1,.md h2{border-bottom:1px solid var(--line);padding-bottom:6px}
+.edui-hero{position:relative;padding-top:88px}
+.edui-back{position:absolute;top:12px;left:20px}
+.edui-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.edui-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.edui-card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.edui-card h2{font-size:1.25rem}
+.edui-card p{color:var(--muted)}
+.edui-card ul{margin:14px 0 0;padding-left:20px}
+.edui-card li{margin:6px 0}
+.edui-badge{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--acc);color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.04em}
+@media(max-width:600px){.topnav{padding:0 12px}.topnav-brand{font-size:.95rem}.lang{top:70px}.hero{padding-top:64px}.edui-hero{padding-top:82px}}
